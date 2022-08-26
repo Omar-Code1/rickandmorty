@@ -5,13 +5,6 @@ import PintarDatos from './componets/PintarDatos';
 const App = () => {
   const [nombrePersonaje, setNombrePersonaje] = useState('');
 
-  const handleScroll = (event) => {
-    console.log('scrollTop: ', event.currentTarget.scrollTop);
-    console.log('offsetHeight: ', event.currentTarget.offsetHeight);
-    if (('scrollTop: ', event.currentTarget.scrollTop > 100)) {
-    }
-  };
-
   return (
     <div onScroll={handleScroll} className="container">
       <h1>App Rick and Morty</h1>
