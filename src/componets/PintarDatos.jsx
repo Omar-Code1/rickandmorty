@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 import Loading from './Loading';
 import Personajes from './Personajes';
 
-const PintarDatos = ({ nombrePersonaje, setNombrePersonaje }) => {
+const PintarDatos = ({ nombrePersonaje, reinicio }) => {
   const [personajes, setPersonajes] = useState([]);
   const [info, setInfo] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -12,9 +12,9 @@ const PintarDatos = ({ nombrePersonaje, setNombrePersonaje }) => {
 
   useEffect(() => {
     consumirApi(url, nombrePersonaje);
-  }, [nombrePersonaje]);
+  }, [nombrePersonaje, reinicio]);
 
-  const consumirApi = async (url, nombre = '') => {
+  const consumirApi = async (url, nombre) => {
     setLoading(true);
     try {
       const res = await fetch(url + `${nombre ? `/?name=${nombre}` : ''}`);
@@ -37,10 +37,6 @@ const PintarDatos = ({ nombrePersonaje, setNombrePersonaje }) => {
     }
   };
 
-  const handleReiniciar = () => {
-    consumirApi(url);
-    setNombrePersonaje('');
-  };
   const handlePagination = (e) => {
     if (e.target.textContent === 'Next') {
       consumirApi(info.next);
@@ -55,12 +51,6 @@ const PintarDatos = ({ nombrePersonaje, setNombrePersonaje }) => {
   }
   return (
     <>
-      <button
-        onClick={handleReiniciar}
-        className="btn btn-primary text-light mb-2"
-      >
-        Reiniciar
-      </button>
       <div className="row">
         {personajes.map((item) => (
           <Personajes key={item.id} personaje={item} />
