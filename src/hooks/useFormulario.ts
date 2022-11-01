@@ -1,9 +1,15 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
-export const useFormulario = (initialState = {}) => {
+
+
+interface Parameters {
+  nombre: string
+}
+
+export const useFormulario = (initialState:Parameters) => {
   const [inputs, setInputs] = useState(initialState);
 
-  const handleChange = (e) => {
+  const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked, type } = e.target;
 
     setInputs((old) => ({
@@ -16,5 +22,5 @@ export const useFormulario = (initialState = {}) => {
     setInputs(initialState);
   };
 
-  return [inputs, handleChange, reset];
+  return {inputs, handleChange, reset};
 };

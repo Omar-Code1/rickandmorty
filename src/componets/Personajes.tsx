@@ -1,6 +1,10 @@
-import React from 'react';
+import { Personaje } from '../types/types';
 
-const Personajes = ({ personaje }) => {
+interface Props {
+  personaje: Personaje;
+}
+
+const Personajes = ({ personaje }: Props) => {
   const { name, species, status, gender, image } = personaje;
 
   return (

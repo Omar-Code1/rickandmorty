@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
+import { Apidata } from '../types/types';
 import Loading from './Loading';
 import Personajes from './Personajes';
 
-const PintarDatos = ({ nombrePersonaje, reinicio }) => {
-  const [personajes, setPersonajes] = useState([]);
-  const [info, setInfo] = useState([]);
+interface Props {
+  nombrePersonaje: string;
+  reinicio: boolean;
+}
+
+const PintarDatos = ({ nombrePersonaje, reinicio }: Props) => {
+  const [personajes, setPersonajes] = useState<Apidata['results']>([]);
+  const [info, setInfo] = useState<Apidata['info']>();
   const [loading, setLoading] = useState(false);
 
   const url = `https://rickandmortyapi.com/api/character`;
@@ -14,7 +20,7 @@ const PintarDatos = ({ nombrePersonaje, reinicio }) => {
     consumirApi(url, nombrePersonaje);
   }, [nombrePersonaje, reinicio]);
 
-  const consumirApi = async (url, nombre) => {
+  const consumirApi = async (url?: string, nombre?: string) => {
     setLoading(true);
     try {
       const res = await fetch(url + `${nombre ? `/?name=${nombre}` : ''}`);
@@ -27,7 +33,8 @@ const PintarDatos = ({ nombrePersonaje, reinicio }) => {
         });
       }
 
-      const datos = await res.json();
+      const datos: Apidata = await res.json();
+      console.log(datos);
       setPersonajes(datos.results);
       setInfo(datos.info);
     } catch (error) {
@@ -37,12 +44,12 @@ const PintarDatos = ({ nombrePersonaje, reinicio }) => {
     }
   };
 
-  const handlePagination = (e) => {
-    if (e.target.textContent === 'Next') {
-      consumirApi(info.next);
+  const handlePagination = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (e.currentTarget.textContent === 'Next') {
+      consumirApi(info?.next);
     }
-    if (e.target.textContent === 'Prev') {
-      consumirApi(info.prev);
+    if (e.currentTarget.textContent === 'Prev') {
+      consumirApi(info?.prev);
     }
   };
 

@@ -1,9 +1,14 @@
-import React /* , { useState }  */ from 'react';
 import { useFormulario } from '../hooks/useFormulario';
 import Swal from 'sweetalert2';
 
-const Form = ({ setNombrePersonaje, setReinicio, reinicio }) => {
-  const [inputs, handleChange, reset] = useFormulario({
+interface Props {
+  setNombrePersonaje: React.Dispatch<React.SetStateAction<string>>;
+  setReinicio: React.Dispatch<React.SetStateAction<boolean>>;
+  reinicio: boolean;
+}
+
+const Form = ({ setNombrePersonaje, setReinicio, reinicio }: Props) => {
+  const { inputs, handleChange, reset } = useFormulario({
     nombre: '',
   });
 
@@ -14,7 +19,7 @@ const Form = ({ setNombrePersonaje, setReinicio, reinicio }) => {
     setNombrePersonaje('');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!nombre.trim()) {
       return Swal.fire({
