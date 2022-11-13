@@ -1,7 +1,5 @@
 import { ChangeEvent, useState } from 'react';
 
-
-
 interface Parameters {
   nombre: string
 }
