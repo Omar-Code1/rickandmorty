@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
-import {
-  Box,
-  Card,
-  CardContent,
-  Pagination,
-  Skeleton,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Box, Pagination } from '@mui/material';
 import { Apidata } from '../../types/types';
 import { Personajes } from '../Card';
-import { LoadingTsx } from '../Loading';
 import { consumirApi } from '../../api/consumirApi';
 import { useNotification } from '../../context/Notification.context';
 import { CardsSkeleton } from '../CardSckeleton';

@@ -1,3 +1,5 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   AppBar,
   Box,
@@ -7,11 +9,7 @@ import {
   Typography,
   Stack,
 } from '@mui/material';
-
-import { useNavigate } from 'react-router-dom';
 import imgRick from '../img/ricklogo.png';
-
-import React from 'react';
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();

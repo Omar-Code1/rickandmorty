@@ -1,7 +1,7 @@
-import Swal from 'sweetalert2';
+import React from 'react';
 import { Box, Button, TextField } from '@mui/material';
 import { useFormulario } from '../../hooks/useFormulario';
-import React from 'react';
+import { useNotification } from '../../context/Notification.context';
 
 interface Props {
   changenombrePersonaje: (value: string) => void;
@@ -20,15 +20,12 @@ export const Form: React.FC<Props> = ({
 
   let { nombre } = inputs;
 
+  const { getError } = useNotification();
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!nombre.trim()) {
-      return Swal.fire({
-        title: 'Error!',
-        text: 'No deje el nombre vacio',
-        icon: 'error',
-        confirmButtonText: 'Cool',
-      });
+      getError('No deje el nombre vacio');
     }
     changenombrePersonaje(nombre.trim().toLowerCase());
     changePage(1);

@@ -1,13 +1,12 @@
+import React from 'react';
 import {
   Box,
   Card,
   CardContent,
-  Grid,
   Skeleton,
   Stack,
   Typography,
 } from '@mui/material';
-import React from 'react';
 
 export const CardsSkeleton: React.FC = () => {
   return (

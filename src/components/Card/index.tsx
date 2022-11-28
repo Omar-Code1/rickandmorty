@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Box,
   Button,
@@ -8,7 +9,6 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Personaje } from '../../types/types';
 

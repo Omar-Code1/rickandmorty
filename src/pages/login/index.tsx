@@ -7,7 +7,6 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useNotification } from '../../context/Notification.context';
@@ -59,8 +58,6 @@ const LoginPage: React.FC = () => {
         }
         getError(error.message);
       });
-    /*     console.log(loginData);
-     */
   };
 
   return (
