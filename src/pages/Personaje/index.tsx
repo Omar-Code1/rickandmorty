@@ -23,7 +23,7 @@ const PersonajePage: React.FC = () => {
     <Grid container spacing={8} sx={{ p: 3 }}>
       {/* Info */}
       <Grid item xs={12} lg={6}>
-        <Typography mb={2} variant="h1" align="center">
+        <Typography mb={2} variant="h3" align="center">
           {personaje?.name}
         </Typography>
         <Divider />
