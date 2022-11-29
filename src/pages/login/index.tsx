@@ -47,8 +47,8 @@ const LoginPage: React.FC = () => {
     e.preventDefault();
     LoginValidate.validate(loginData)
       .then(() => {
-        getSuccess(JSON.stringify(loginData));
-        setTimeout(() => navigate('/'), 3000);
+        getSuccess('Usuario Valido');
+        setTimeout(() => navigate('/'), 2500);
       })
       .catch((error) => {
         if (!loginData.Username.trim()) {
