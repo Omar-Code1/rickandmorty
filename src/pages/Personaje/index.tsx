@@ -11,10 +11,7 @@ const PersonajePage: React.FC = () => {
   const [personaje, SetPersonaje] = useState<Personaje>();
 
   useEffect(() => {
-    consumirApi
-      .getById(id)
-      .then((res) => res.json())
-      .then((data: Personaje) => SetPersonaje(data));
+    consumirApi.getById(id).then((data: Personaje) => SetPersonaje(data));
   }, [id]);
 
   return !personaje ? (

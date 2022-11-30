@@ -4,14 +4,15 @@ import { Box, Pagination } from '@mui/material';
 import { Apidata } from '../../types/types';
 import { Personajes } from '../Card';
 import { consumirApi } from '../../api/consumirApi';
-import { useNotification } from '../../context/Notification.context';
 import { CardsSkeleton } from '../CardSckeleton';
+import { useNotification } from '../../context/Notification.context';
 
 interface Props {
   nombrePersonaje: string;
   reinicio: boolean;
   changePage: (value: number) => void;
   page: number;
+  handleReiniciar: () => void;
 }
 
 export const PintarDatos: React.FC<Props> = ({
@@ -19,6 +20,7 @@ export const PintarDatos: React.FC<Props> = ({
   reinicio,
   changePage,
   page,
+  handleReiniciar,
 }) => {
   const [personajes, setPersonajes] = useState<Apidata['results']>([]);
   const [pages, setPages] = useState<number>();
@@ -26,20 +28,17 @@ export const PintarDatos: React.FC<Props> = ({
   const { getError } = useNotification();
 
   useEffect(() => {
+    setLoading(true);
     consumirApi
       .getAll(page, nombrePersonaje)
-      .then((res) => {
-        if (!res.ok) {
-          return getError(`No se encuentra el personaje ${nombrePersonaje}`);
-        }
-        return res.json();
-      })
       .then((data: Apidata) => {
-        setLoading(true);
         setPersonajes(data.results);
         setPages(data.info.pages);
       })
-      .catch((e) => console.log(e))
+      .catch((e) => {
+        getError(`No se encuentra el personaje ${nombrePersonaje}`);
+        handleReiniciar();
+      })
       .finally(() => setTimeout(() => setLoading(false), 1000));
   }, [nombrePersonaje, reinicio, page]);
 

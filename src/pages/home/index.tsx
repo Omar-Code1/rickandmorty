@@ -33,6 +33,7 @@ const HomePage: React.FC = () => {
       <PintarDatos
         nombrePersonaje={nombrePersonaje}
         reinicio={reinicio}
+        handleReiniciar={handleReiniciar}
         changePage={changePage}
         page={page}
       />
